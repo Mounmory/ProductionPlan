@@ -1,0 +1,4 @@
+WorkPlaceInfo.mdb			工位信息
+ProductionProcessInfo.mdb	保存编制好的工艺流程表
+ProductionPlanedInfo.mdb	保存排列完成的生产计划
+WorkPlaceUsedInfo.mdb		保存排列完的生产计划使用的工位信息

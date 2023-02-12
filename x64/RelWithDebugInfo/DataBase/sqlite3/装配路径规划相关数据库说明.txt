@@ -1,0 +1,3 @@
+MdlMatrixInfo.db			装配体位姿矩阵信息
+MdlAsmOderInfo.db			装配体路径规划信息
+MdlAsmPicture.db			装配动画规划路径信息

@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+#*.dll
 
 # Fortran module files
 *.mod
@@ -24,9 +24,26 @@
 *.lai
 *.la
 *.a
-*.lib
+#*.lib
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
+/BaseForProTookit/x64/RelWithDebugInfo
+/BaseForProTookit/BaseForProTookit.vcxproj.filters
+*.user
+*.filters
+/ConsoleTest/x64/RelWithDebugInfo
+/DataBaseService/x64/RelWithDebugInfo
+/ProductionPlan/x64/RelWithDebugInfo
+/ProductionPlanMenu/x64/RelWithDebugInfo
+/x64/RelWithDebugInfo/DataBase/Access/back
+/x64/RelWithDebugInfo/log
+*.exp
+*.iobj
+*.ipdb
+*.pdb
+*.ilk
+/CreProTookitDevelop.VC.db
+/CreProTookitDevelop.VC.VC.opendb
