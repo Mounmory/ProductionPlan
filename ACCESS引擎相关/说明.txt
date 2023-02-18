@@ -1,0 +1,8 @@
+点击安装Access引擎后，再启动应用程序ProductionPlanMenu.exe
+
+我在新装系统的电脑上测试过，能够成功，若还不成功，可联系我处理
+
+参考：
+https://blog.csdn.net/u013780740/article/details/88572358
+
+
