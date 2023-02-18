@@ -253,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynaArray.h" />
+    <ClInclude Include="DynaArrayEx.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -260,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DynaArray.cpp" />
+    <ClCompile Include="DynaArrayEx.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

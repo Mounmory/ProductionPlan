@@ -14,9 +14,8 @@
 #include "DynaArray.h"
 #include "Logger.h"
 
-class PLAN_CALCULATE_API stuPlanRet//生产计划排列结果
+struct PLAN_CALCULATE_API stuPlanRet//生产计划排列结果
 {
-public:
 	stuPlanRet() :nMaxDayLen(0), nDayCount(0), nWorkTotalDay(0), nMertTotalDay(0) {}
 
 	stuPlanRet(stuPlanRet&& rhs)  noexcept :
@@ -53,7 +52,7 @@ public:
 		arrWorkUsed = rhs.arrWorkUsed;
 		return *this;
 	}
-public:
+
 	uint16_t nMaxDayLen;//生产周期
 	uint16_t nDayCount;//产品累计生产时间
 	uint16_t nWorkTotalDay;//工位使用累计天数

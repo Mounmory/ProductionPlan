@@ -7,7 +7,7 @@
 template<typename _Ty>
 std::ostream& operator<<(std::ostream &os, const DynaArray2D<_Ty>& rhs)
 {
-	os <<"DynaArray2D Type:"<< typeid(_Ty).name() <<
+	os << "DynaArray2D Type:" << typeid(_Ty).name() <<
 		"\t" << "nRow:" << rhs.m_rows << "\t" << "nCol:" << rhs.m_cols << std::endl;
 	for (size_t i = 0; i < rhs.m_rows; ++i)
 	{
@@ -21,7 +21,7 @@ std::ostream& operator<<(std::ostream &os, const DynaArray2D<_Ty>& rhs)
 }
 
 template<typename _Ty>
-DynaArray2D<_Ty>::DynaArray2D():m_rows(0),m_cols(0),m_array(nullptr)
+DynaArray2D<_Ty>::DynaArray2D() :m_rows(0), m_cols(0), m_array(nullptr)
 {
 
 }
@@ -37,16 +37,16 @@ DynaArray2D<_Ty>::DynaArray2D(const size_t nRow, const size_t nCol) : m_rows(nRo
 }
 
 template<typename _Ty>
-DynaArray2D<_Ty>::DynaArray2D(const DynaArray2D<_Ty> &rhs):m_rows(0),m_cols(0), m_array(nullptr)
+DynaArray2D<_Ty>::DynaArray2D(const DynaArray2D<_Ty> &rhs) :m_rows(0), m_cols(0), m_array(nullptr)
 {
 	*this = rhs;
 }
 
 template<typename _Ty>
 DynaArray2D<_Ty>::DynaArray2D(DynaArray2D<_Ty> && rhs) noexcept:
-	m_rows(std::exchange(rhs.m_rows,0)),
-	m_cols(std::exchange(rhs.m_cols,0)),
-	m_array(std::exchange(rhs.m_array,nullptr)) 
+m_rows(std::exchange(rhs.m_rows, 0)),
+m_cols(std::exchange(rhs.m_cols, 0)),
+m_array(std::exchange(rhs.m_array, nullptr))
 {
 }
 
@@ -113,14 +113,14 @@ void DynaArray2D<CString>::zeroArray()
 template<typename _Ty>
 void DynaArray2D<_Ty>::zeroArray()
 {
-	for(size_t i = 0; i < m_rows; ++i)
+	for (size_t i = 0; i < m_rows; ++i)
 	{
 		memset(m_array[i], 0, m_cols * sizeof(_Ty));
 	}
 }
 
 template<typename _Ty>
-bool DynaArray2D<_Ty>::isMemoryCopy() 
+bool DynaArray2D<_Ty>::isMemoryCopy()
 {
 	return typeid(_Ty) == typeid(bool) ||
 		typeid(_Ty) == typeid(unsigned char) ||
@@ -191,7 +191,7 @@ DynaArray2D<_Ty>& DynaArray2D<_Ty>::operator=(const _Ty& value)
 			}
 		}
 	}
-	else 
+	else
 	{
 		for (size_t i = 0; i < m_rows; ++i)
 		{
@@ -220,7 +220,7 @@ DynaArray2D<_Ty>& DynaArray2D<_Ty>::operator=(const DynaArray2D<_Ty> &rhs)
 				memcpy(m_array[i], rhs.m_array[i], m_cols * sizeof(_Ty));
 			}
 		}
-		else 
+		else
 		{
 			for (size_t i = 0; i < m_rows; ++i)
 			{
@@ -268,7 +268,7 @@ bool DynaArray2D<_Ty>::operator==(const DynaArray2D<_Ty> &rhs)
 }
 
 template<typename _Ty>
-bool DynaArray2D<_Ty>::operator!=(const DynaArray2D<_Ty>& rhs) 
+bool DynaArray2D<_Ty>::operator!=(const DynaArray2D<_Ty>& rhs)
 {
 	return !(*this == rhs);
 }

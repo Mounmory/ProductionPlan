@@ -211,10 +211,10 @@ bool initProdPlanDBService()
 	}
 	auto DBPtr = getProPlanDBService();
 	DBPtr->startService();
-	DBPtr->readDadaBaseCmd("WorkPlaceInfo");//导入生产计划表信息
-	DBPtr->readDadaBaseCmd("ProductionProcessInfo");//导入生产计划表信息
-	DBPtr->readDadaBaseCmd("ProductionPlanedInfo");//导入生产计划表信息
-	DBPtr->readDadaBaseCmd("WorkPlaceUsedInfo");//导入生产计划表信息
+	DBPtr->readDadaBaseCmd("WorkPlaceInfo");			//导入工位信息数据库信息
+	DBPtr->readDadaBaseCmd("ProductionProcessInfo");	//导入工艺流程数据库信息
+	DBPtr->readDadaBaseCmd("ProductionPlanedInfo");		//导入已排列的生产计划数据库信息
+	DBPtr->readDadaBaseCmd("WorkPlaceUsedInfo");		//导入已排列的生产计划的工位使用数据库信息
 	
 	//线程池服务
 	getThreadPoolService()->start();

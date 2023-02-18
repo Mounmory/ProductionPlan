@@ -932,6 +932,7 @@ void CTechnolProductionPlanDlg::OnBnClickedBtnSavePlanAndWorkplaceUsedInfoToDb()
 	GetPlanWorkPlaceUsedInfo(strVecWorkPlaceName, nVecWorkPlaceUsedIndex, nDayMin, nDayMax);
 
 	uint32_t nDaysCount = nDayMax - nDayMin;//占用的生产天数
+
 	//保存工位使用信息
 	{
 		//创建表格SQL语句
@@ -960,8 +961,13 @@ void CTechnolProductionPlanDlg::OnBnClickedBtnSavePlanAndWorkplaceUsedInfoToDb()
 			}
 		}
 		//添加表格命令
-		uint32_t cmdID = m_dbService->createTableCmd("WorkPlaceUsedInfo", strTableName, strSQL, std::move(temValues));
-		g_mapDealResult.insert(std::make_pair(cmdID, updateProcTable));
+		//uint32_t cmdID = m_dbService->createTableCmd("WorkPlaceUsedInfo", strTableName, strSQL, std::move(temValues));
+		//g_mapDealResult.insert(std::make_pair(cmdID, updateProcTable));
+		if (!m_dbService->createTableSyn("WorkPlaceUsedInfo", strTableName, strSQL, std::move(temValues)))//使用同步命令
+		{
+			MessageBox("保存工位使用信息失败！", "提示", MB_ICONERROR);
+			return;
+		}
 	}
 
 	//保存排列的生产计划
@@ -981,17 +987,38 @@ void CTechnolProductionPlanDlg::OnBnClickedBtnSavePlanAndWorkplaceUsedInfoToDb()
 		DynaArray2D<STRING> temValues(mRowCount1, nDaysCount + 8); 
 		for (int i = 0; i < mRowCount1; ++i)
 		{
-			for (int j = 0; j < nDaysCount + 8; ++j)//写入基本信息
+			for (int j = 0; j < 8; ++j)//写入基本信息
 			{
 				temValues[i][j] = m_grid1.GetItemText(i, j);
 			}
+			for (int j = nDayMin + 8 ; j < nDayMax + 8; ++j)//写入生产计划信息
+			{
+				temValues[i][j - nDayMin] = m_grid1.GetItemText(i, j);
+			}
+			//写入生产计划信息
 		}
 
-		uint32_t cmdID = m_dbService->createTableCmd("ProductionPlanedInfo", strTableName, strSQL, std::move(temValues));
-		g_mapDealResult.insert(std::make_pair(cmdID, updateProcTable));
+		//uint32_t cmdID = m_dbService->createTableCmd("ProductionPlanedInfo", strTableName, strSQL, std::move(temValues));
+		//g_mapDealResult.insert(std::make_pair(cmdID, updateProcTable));
+		if (!m_dbService->createTableSyn("ProductionPlanedInfo", strTableName, strSQL, std::move(temValues)))//使用同步命令
+		{
+			m_dbService->deleteTableSyn("WorkPlaceUsedInfo", strTableName);//删掉工位信息中的表格
+			MessageBox("保存工位使用及生产计划信息失败！", "提示", MB_ICONERROR);
+			return;
+		}
 	}
 
 	OnBnClickedBtnShowWorkPlaceUsedToList2();//显示已用工位
+
+	//显示结果到状态栏
+	{
+		CString strStatus;
+		strStatus.Format("添加表格 成功 ！表格名称 %s 。", strTableName);
+		m_StatusBar.SetPaneText(1, strStatus);
+		//显示设置
+		g_statuData.strInfo = strStatus;
+		g_statuData.nTimeCount = 15;//显示15s
+	}
 }
 
 //获取工位使用信息

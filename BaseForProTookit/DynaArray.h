@@ -27,7 +27,7 @@ public:
 	friend std::ostream& operator<< (std::ostream &os, const DynaArray2D<_Ty>& rhs);
 	//或者写成下面形式，在“<<”后加上“<>”表示这是一个函数模板
 	//friend std::ostream& operator<< <>(std::ostream &os, const DynaArray2D<_Ty>& rhs);
-	
+
 	bool operator==(const DynaArray2D<_Ty> &rhs);
 	bool operator!=(const DynaArray2D<_Ty> &rhs);
 private:

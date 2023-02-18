@@ -47,3 +47,13 @@
 *.ilk
 /CreProTookitDevelop.VC.db
 /CreProTookitDevelop.VC.VC.opendb
+/x64/RelWithDebugInfo/BaseForProTookit.lib
+/x64/RelWithDebugInfo/DataBaseService.lib
+/x64/RelWithDebugInfo/ProductionPlan.lib
+/x64/RelWithDebugInfo/ProductionPlanCalculateLib.lib
+/x64/RelWithDebugInfo/TestConsole.lib
+/ipch/DATABASESERVICE-984de1ea
+/.vs/CreProTookitDevelop/v14
+/ipch/BASEFORPROTOOKIT-8e2980d8
+/ReadMe(1).txt
+/.vs

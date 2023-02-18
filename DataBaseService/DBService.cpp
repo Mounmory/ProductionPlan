@@ -207,6 +207,10 @@ namespace DataBase {
 					m_TableNames.erase(iterTableName);
 					break;
 				}
+				else
+				{
+					++iterTableName;
+				}
 			}
 			return true;
 		}
@@ -336,6 +340,54 @@ namespace DataBase {
 		std::lock_guard<std::mutex> lockTread(m_mutDBTask);
 		m_queueCommand.push(std::move(temCmd));
 		return temCmd.cmdID;
+	}
+
+	//同步操作
+	//bool DBService::readDadaBaseSyn(const STRING& strDBName)	
+	//{
+	//	return true;
+	//}
+
+	bool DBService::createTableSyn(const STRING& strDBName, const STRING& strTableName, const STRING& strSQL, DynaArray2D<STRING> arrValue) 
+	{
+		DBCommand temCmd;
+		//temCmd.cmdID = ++m_cmdID;
+		//temCmd.cmdType = DBCommandType::DATABASE_CRATE_TABLE;
+		temCmd.strDBName = strDBName;
+		temCmd.strTableName = strTableName;
+		temCmd.strSQL = strSQL;
+		temCmd.arrValue = std::move(arrValue);
+
+		std::lock_guard<std::mutex> lockTread(m_mutDBRead);
+		bool ret = creatTableInner(temCmd);
+		return ret;
+	}
+
+	bool DBService::deleteTableSyn(const STRING& strDBName, const STRING& strTableName) 
+	{
+		DBCommand temCmd;
+		//temCmd.cmdID = ++m_cmdID;
+		//temCmd.cmdType = DBCommandType::DATABASE_DELETE_TABLE;
+		temCmd.strDBName = strDBName;
+		temCmd.strTableName = strTableName;
+
+		std::lock_guard<std::mutex> lockTread(m_mutDBRead);
+		bool ret = deleteTableInner(temCmd);
+		return ret;
+	}
+
+	bool DBService::updateTableSyn(const STRING& strDBName, const STRING& strTableName, DynaArray2D<STRING> arrValue) 
+	{
+		DBCommand temCmd;
+		//temCmd.cmdID = ++m_cmdID;
+		//temCmd.cmdType = DBCommandType::DATABASE_UPTATE_TABLE;
+		temCmd.strDBName = strDBName;
+		temCmd.strTableName = strTableName;
+		temCmd.arrValue = std::move(arrValue);
+		
+		std::lock_guard<std::mutex> lockTread(m_mutDBRead);
+		bool ret = updateTableInner(temCmd);
+		return ret;
 	}
 
 	void DBService::taskTread()
@@ -534,7 +586,8 @@ namespace DataBase {
 		}
 		m_Logger->LogDebug("[%s][%d] Delete table(%s) from DataBase(%s) end!", __STRING_FUNCTION__, __LINE__, cmd.strTableName, cmd.strDBName);
 		//删除内存
-		return m_dbInfos[cmd.strDBName].eraseTable(cmd.strTableName);//删除表格
+		bool ret = m_dbInfos[cmd.strDBName].eraseTable(cmd.strTableName);//删除表格
+		return ret;
 	}
 
 	bool DBService::updateTableInner(DBCommand& cmd)

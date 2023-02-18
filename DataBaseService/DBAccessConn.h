@@ -49,9 +49,3 @@ private:
 	bool m_bIsLog;
 };
 
-extern DB_BASE_FUNC_API int nADOConn;
-
-DB_BASE_FUNC_API int fnADOConn(void);
-
-DB_BASE_FUNC_API int ConvertStrinToCodeBYTE(BYTE *pbDest,const BYTE *pbSrc);
-DB_BASE_FUNC_API int ConvertCodeToStringBYTE(BYTE *pbDest,const BYTE *pbSrc);

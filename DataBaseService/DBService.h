@@ -43,7 +43,7 @@ namespace DataBase
 		bool bResult;//执行结果
 	};
 	/***********抽象基类，接收数据库操作执行结果*********/
-	class DB_SERVICE_API IListenner //监听Service处理命令结果
+	class DB_SERVICE_API IListenner //作为客户端类的抽象基类，采用观察者设计模式，处理异步命令结果
 	{
 	public:
 		IListenner() = default;
@@ -54,7 +54,7 @@ namespace DataBase
 	};
 
 	/*****************数据库表格信息********************/
-	class DB_SERVICE_API TableInfo
+	class DB_SERVICE_API TableInfo//表格信息类，用于保存数据库中表格信息
 	{
 	public:
 		TableInfo();
@@ -62,7 +62,7 @@ namespace DataBase
 		TableInfo(const TableInfo& rhs);
 		TableInfo(TableInfo&& ths) noexcept;
 	public:
-		TableInfo& operator=(const TableInfo& rhs);//对自赋值测试
+		TableInfo& operator=(const TableInfo& rhs);
 		TableInfo& operator=(TableInfo&& rhs) noexcept;
 
 		//设置列
@@ -121,11 +121,11 @@ namespace DataBase
 		uint32_t deleteTableCmd(const STRING& strDBName,const STRING& strTableName);//删除表格
 		uint32_t updateTableCmd(const STRING& strDBName, const STRING& strTableName, DynaArray2D<STRING> arrValue);//在数据库中添加一个表格，若包含则覆盖
 
-		////同步操作
+		//同步操作
 		//bool readDadaBaseSyn(const STRING& strDBName);//添加一个数据库信息（非创建一个新数据库）
-		//bool createTableSyn(const STRING& strDBName, const STRING& strTableName, const STRING& strSQL, DynaArray2D<STRING> arrValue);//在数据库中添加一个表格，若包含则覆盖
-		//bool deleteTableSyn(const STRING& strDBName, const STRING& strTableName);//删除表格
-		//bool updateTableSyn(const STRING& strDBName, const STRING& strTableName, DynaArray2D<STRING> arrValue);//在数据库中添加一个表格，若包含则覆盖
+		bool createTableSyn(const STRING& strDBName, const STRING& strTableName, const STRING& strSQL, DynaArray2D<STRING> arrValue);//在数据库中添加一个表格，若包含则覆盖
+		bool deleteTableSyn(const STRING& strDBName, const STRING& strTableName);//删除表格
+		bool updateTableSyn(const STRING& strDBName, const STRING& strTableName, DynaArray2D<STRING> arrValue);//在数据库中添加一个表格，若包含则覆盖
 
 	public:
 		DataBaseInfo operator[](const STRING& strDBName);
@@ -138,7 +138,7 @@ namespace DataBase
 		bool updateTableInner(DBCommand& cmd);//更新表格
 
 	private:
-		std::set<IListenner*> m_allListener;
+		std::set<IListenner*> m_allListener;//观察者列表
 		std::mutex m_lockListen;
 		void notifyAll(std::queue<DBResult>& rst);
 
