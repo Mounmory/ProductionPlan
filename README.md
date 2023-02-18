@@ -37,6 +37,7 @@
 	
 - 2.3 ProductionPlan/ProductionPlanCalculateLib/
 	- ProductionPlanCalculate.h:封装生产计划排列算法，源码暂不公开
+	- ProductionPlanCalculateLib.lib(dll)：编译(运行)依赖
 
 - 2.4 ProductionPlan/CommonFunctionFile/（可忽略）
 	提炼出一些公共函数及依赖的sqlite库文件
