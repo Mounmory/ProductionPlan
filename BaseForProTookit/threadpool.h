@@ -48,11 +48,16 @@ private:
 //线程池类型
 class THREADPOOL_API ThreadPool
 {
-public:
+private:
 	//线程池构造
 	ThreadPool();
+public:
+	ThreadPool(const ThreadPool&) = delete;
 	//线程池析构
 	~ThreadPool();
+	ThreadPool& operator=(const ThreadPool&) = delete;
+public:
+	static ThreadPool* getThreadPool();
 
 	//设置线程池的工作模式
 	void setMode(PoolMode mode);
@@ -123,8 +128,7 @@ public:
 
 	void stop();
 
-	ThreadPool(const ThreadPool&) = delete;
-	ThreadPool& operator=(const ThreadPool&) = delete;
+
 
 private:
 	//定义线程函数
@@ -175,7 +179,5 @@ private:
 	//表示当前线程池的启动状态
 	std::atomic_bool m_isPoolRunning;
 };
-
-std::shared_ptr<ThreadPool> THREADPOOL_API getThreadPoolService();
 
 #endif // !THREADPOOL_H_

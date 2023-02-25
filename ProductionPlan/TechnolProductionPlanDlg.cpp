@@ -28,7 +28,7 @@ IMPLEMENT_DYNAMIC(CTechnolProductionPlanDlg, CDialog)
 CTechnolProductionPlanDlg::CTechnolProductionPlanDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CTechnolProductionPlanDlg::IDD, pParent)
 	, m_dbService(getProPlanDBService())
-	, m_threadPool(getThreadPoolService())
+	, m_threadPool(ThreadPool::getThreadPool())
 	,m_bTreadIsRunning(false)
 	,m_nMaxDayPlan(60)
 {

@@ -217,8 +217,9 @@ bool initProdPlanDBService()
 	DBPtr->readDadaBaseCmd("WorkPlaceUsedInfo");		//导入已排列的生产计划的工位使用数据库信息
 	
 	//线程池服务
-	getThreadPoolService()->start();
+	ThreadPool::getThreadPool()->start();
 
+	return true;
 }
 
 void terminateProdPlanDBService() 
@@ -229,7 +230,7 @@ void terminateProdPlanDBService()
 	DBPtr = nullptr;//析构
 
 	//线程池
-	getThreadPoolService()->stop();
+	ThreadPool::getThreadPool()->stop();
 }
 
 void TecnProcessPrepareDlg()

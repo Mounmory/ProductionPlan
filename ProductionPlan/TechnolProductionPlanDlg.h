@@ -49,7 +49,7 @@ private:
 private:
 	TechnolProductionPlanResultDlg m_ResultDlg;	//显示结果对话框对象
 	std::shared_ptr<DBService> m_dbService;		//数据库服务
-	std::shared_ptr<ThreadPool> m_threadPool;	//线程池服务
+	ThreadPool* m_threadPool;	//线程池服务
 
 	//控件变量
 	CImageList	m_ImageList;	//创建列表控件前的图标对象

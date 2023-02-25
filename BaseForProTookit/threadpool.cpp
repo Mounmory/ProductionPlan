@@ -224,8 +224,8 @@ bool ThreadPool::checkRunningState()const
 	return m_isPoolRunning;
 }
 
-std::shared_ptr<ThreadPool> getThreadPoolService()
+ThreadPool* ThreadPool::getThreadPool()
 {
-	static std::shared_ptr<ThreadPool> threadPool = std::make_shared<ThreadPool>();
-	return threadPool;
+	static ThreadPool* pThreadPool = new ThreadPool();
+	return pThreadPool;
 }

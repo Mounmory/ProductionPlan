@@ -321,15 +321,15 @@ int sum2(int a, int b, int c)
 }
 void testCaseThreadPool() 
 {
-	ThreadPool pool;
-	pool.start();
+	ThreadPool* pool = ThreadPool::getThreadPool();
+	pool->start();
 	DynaArray2D<int> dArr(2, 3);
 	dArr = 6;
 	std::cout << "dArr init value is " << dArr << std::endl;
 
-	std::future<DynaArray2D<int>> res1 = pool.submit(sum1,dArr);
+	std::future<DynaArray2D<int>> res1 = pool->submit(sum1,dArr);
 
-	std::future<int> res2 = pool.submit(sum2, 1, 2, 3);
+	std::future<int> res2 = pool->submit(sum2, 1, 2, 3);
 
 	DynaArray2D<int> rt = res1.get();
 	Sleep(2000);

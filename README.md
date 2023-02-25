@@ -2,8 +2,8 @@
 
 ## 0.前言
 
-**开发环境：Win10 + Visual Studio 2015 + Microsoft Access 2016(或Microsoft Access引擎)**
-> 注意：由于源码不断更新，本文档与源码不一致部分，以源码为准！若编译或启动失败，看《ACCESS引擎相关》文件夹内容
+**开发环境：Win10 + Visual Studio 2015 + Microsoft Access (或Microsoft Access引擎)**
+> 注意：由于源码不断更新，本文档与源码不一致部分，以源码为准！若编译或启动失败，看《ACCESS引擎相关》文件夹安装引擎
 
 **生产计划管理系统**基于通过MFC编程对Creo二次开发，读取三维模型结构，自动生成物料明细表，实现工位管理、工艺流程管理及生产计划排列，主要实现功能如下：
  
